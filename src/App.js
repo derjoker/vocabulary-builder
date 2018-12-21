@@ -1,25 +1,27 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { Stitch, UserPasswordCredential } from 'mongodb-stitch-browser-sdk'
+
+import Kindle from './containers/Kindle'
+
+try {
+  const client = Stitch.initializeDefaultAppClient(
+    process.env.REACT_APP_STITCH_APP_KEY
+  )
+  const credential = new UserPasswordCredential(
+    process.env.REACT_APP_TEST_EMAIL,
+    process.env.REACT_APP_TEST_PASSWORD
+  )
+  client.auth.loginWithCredential(credential)
+} catch (error) {
+  // ignore: default app can only be set once
+  console.log(error)
+}
 
 class App extends Component {
   render () {
     return (
-      <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className='App-link'
-            href='https://reactjs.org'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Kindle />
       </div>
     )
   }
