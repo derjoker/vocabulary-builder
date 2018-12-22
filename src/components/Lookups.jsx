@@ -10,7 +10,7 @@ import Stem from './Stem'
 
 class Lookups extends Component {
   render () {
-    const { lookups } = this.props
+    const { lookups, save } = this.props
     return (
       <Table>
         <TableBody>
@@ -18,7 +18,7 @@ class Lookups extends Component {
             <TableRow key={lookup._id}>
               <TableCell>
                 <Typography>{lookup.usage}</Typography>
-                <Stem lookup={lookup} />
+                <Stem lookup={lookup} save={save} />
               </TableCell>
             </TableRow>
           ))}
@@ -29,11 +29,15 @@ class Lookups extends Component {
 }
 
 Lookups.propTypes = {
-  lookups: PropTypes.array.isRequired
+  lookups: PropTypes.array.isRequired,
+  save: PropTypes.func.isRequired
 }
 
 Lookups.defaultProps = {
-  lookups: []
+  lookups: [],
+  save: (lookupId, stem) => {
+    console.log(lookupId, stem)
+  }
 }
 
 export default Lookups

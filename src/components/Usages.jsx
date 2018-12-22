@@ -12,12 +12,14 @@ import Stem from './Stem'
 
 class Usages extends Component {
   render () {
+    const { save } = this.props
     const byUsage = groupBy(this.props.lookups, 'usage')
     const usages = entries(byUsage).map(([usage, lookups]) => ({
       usage,
       pos: 'pos',
       lookups
     }))
+
     return (
       <Table>
         <TableBody>
@@ -26,7 +28,7 @@ class Usages extends Component {
               <TableCell>
                 <Typography>{usage.usage}</Typography>
                 {usage.lookups.map(lookup => (
-                  <Stem lookup={lookup} />
+                  <Stem lookup={lookup} save={save} />
                 ))}
               </TableCell>
             </TableRow>
@@ -38,11 +40,15 @@ class Usages extends Component {
 }
 
 Usages.propTypes = {
-  lookups: PropTypes.array.isRequired
+  lookups: PropTypes.array.isRequired,
+  save: PropTypes.func.isRequired
 }
 
 Usages.defaultProps = {
-  lookups: []
+  lookups: [],
+  save: (lookupId, stem) => {
+    console.log(lookupId, stem)
+  }
 }
 
 export default Usages

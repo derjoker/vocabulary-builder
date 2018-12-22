@@ -49,7 +49,12 @@ class Book extends Component {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Lookups lookups={book.lookups} />
+        <Lookups
+          lookups={book.lookups}
+          save={(lookupId, stem) => {
+            this.client.callFunction('updateStem', [book._id, lookupId, stem])
+          }}
+        />
       </Dialog>
     )
   }
