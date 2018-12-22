@@ -11,6 +11,7 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import CloseIcon from '@material-ui/icons/Close'
 import { Stitch } from 'mongodb-stitch-browser-sdk'
 import flattenDepth from 'lodash/flattenDepth'
+import escape from 'lodash/escape'
 import stringify from 'csv-stringify'
 
 import Lookups from '../components/Lookups'
