@@ -7,10 +7,21 @@ import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import Slide from '@material-ui/core/Slide'
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import CloseIcon from '@material-ui/icons/Close'
 import { Stitch } from 'mongodb-stitch-browser-sdk'
+import flattenDepth from 'lodash/flattenDepth'
+import stringify from 'csv-stringify'
 
 import Lookups from '../components/Lookups'
+
+function card (word, example, definition, explanation) {
+  const front = `<h2>${escape(word)}</h2><p>${escape(example)}</p>`
+  const back = explanation
+    ? `<p>${escape(explanation)}</p><p>${escape(definition)}</p>`
+    : `<p>${escape(definition)}</p>`
+  return [front, back]
+}
 
 const styles = {
   appBar: {
@@ -44,6 +55,57 @@ class Book extends Component {
             >
               {book.title}
             </Typography>
+            <IconButton
+              color='inherit'
+              onClick={() => {
+                const dicts = {
+                  de: 'duden'
+                }
+                const dict = dicts[book.lang]
+                dict &&
+                  this.client
+                    .callFunction('getWords', [
+                      dict,
+                      book.lookups.map(lookup => lookup.stem)
+                    ])
+                    .then(words => {
+                      console.log(words)
+                      const cards = flattenDepth(
+                        words.map(word =>
+                          word.definitions.map(definition =>
+                            definition.examples.map(example =>
+                              card(
+                                word.word,
+                                example.example,
+                                definition.definition,
+                                example.definition
+                              )
+                            )
+                          )
+                        ),
+                        2
+                      )
+                      console.log(cards)
+                      stringify(cards, (error, output) => {
+                        if (error) console.log(error)
+                        else {
+                          // console.log(output)
+                          const filename = 'anki.csv'
+                          const data = encodeURI(
+                            'data:text/csv;charset=utf-8,' + output
+                          )
+                          const link = document.createElement('a')
+                          link.setAttribute('href', data)
+                          link.setAttribute('download', filename)
+                          link.click()
+                        }
+                      })
+                    })
+              }}
+              aria-label='Download'
+            >
+              <CloudDownloadIcon />
+            </IconButton>
             <IconButton color='inherit' onClick={close} aria-label='Close'>
               <CloseIcon />
             </IconButton>
