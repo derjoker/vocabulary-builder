@@ -10,11 +10,14 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 
+import Word from './Word'
+
 class Stem extends Component {
   constructor (props) {
     super(props)
     this.state = {
       open: false,
+      search: false,
       stem: this.props.lookup.stem
     }
     this.close = this.close.bind(this)
@@ -25,13 +28,20 @@ class Stem extends Component {
   }
 
   render () {
-    const { lookup, save } = this.props
+    const { lookup, save, find } = this.props
     return (
       <div>
         <Chip
           key={lookup._id}
           label={lookup.stem}
           variant='outlined'
+          onClick={() => {
+            if (find && find()) {
+              find()(lookup.stem).then(words => {
+                this.setState({ search: true, words })
+              })
+            }
+          }}
           onDelete={() => {
             this.setState({ open: true })
           }}
@@ -75,6 +85,17 @@ class Stem extends Component {
             </Button>
           </DialogActions>
         </Dialog>
+        <Dialog
+          open={this.state.search}
+          onClose={() => this.setState({ search: false })}
+          aria-labelledby='form-dialog-title'
+        >
+          <DialogTitle id='form-dialog-title'>{lookup.stem}</DialogTitle>
+          <DialogContent>
+            {this.state.words &&
+              this.state.words.map(word => <Word key={word._id} word={word} />)}
+          </DialogContent>
+        </Dialog>
       </div>
     )
   }
@@ -82,7 +103,8 @@ class Stem extends Component {
 
 Stem.propTypes = {
   lookup: PropTypes.object.isRequired,
-  save: PropTypes.func.isRequired
+  save: PropTypes.func.isRequired,
+  find: PropTypes.func
 }
 
 Stem.defaultProps = {

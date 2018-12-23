@@ -37,6 +37,10 @@ function Transition (props) {
   return <Slide direction='up' {...props} />
 }
 
+const dicts = {
+  de: 'duden'
+}
+
 class Book extends Component {
   constructor (props) {
     super(props)
@@ -59,9 +63,6 @@ class Book extends Component {
             <IconButton
               color='inherit'
               onClick={() => {
-                const dicts = {
-                  de: 'duden'
-                }
                 const dict = dicts[book.lang]
                 dict &&
                   this.client
@@ -116,6 +117,13 @@ class Book extends Component {
           lookups={book.lookups}
           save={(lookupId, stem) => {
             this.client.callFunction('updateStem', [book._id, lookupId, stem])
+          }}
+          find={() => {
+            const dict = dicts[book.lang]
+            if (dict) {
+              return stem =>
+                this.client.callFunction('getWords', [dict, [stem]])
+            }
           }}
         />
       </Dialog>
