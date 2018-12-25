@@ -63,6 +63,14 @@ class Stem extends Component {
               label='Stem'
               fullWidth
               value={this.state.stem}
+              onKeyUp={event => {
+                if (event.key === 'Enter') {
+                  save(lookup._id, this.state.stem)
+                  // positive response
+                  lookup.stem = this.state.stem
+                  this.setState({ open: false })
+                }
+              }}
               onChange={event => {
                 this.setState({ stem: event.target.value })
               }}
