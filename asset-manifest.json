@@ -1,13 +1,13 @@
 {
-  "main.css": "/vocabulary-builder/static/css/main.79764f0f.chunk.css",
-  "main.js": "/vocabulary-builder/static/js/main.f6d128e8.chunk.js",
-  "main.js.map": "/vocabulary-builder/static/js/main.f6d128e8.chunk.js.map",
-  "static/js/1.5b22d163.chunk.js": "/vocabulary-builder/static/js/1.5b22d163.chunk.js",
-  "static/js/1.5b22d163.chunk.js.map": "/vocabulary-builder/static/js/1.5b22d163.chunk.js.map",
+  "main.css": "/vocabulary-builder/static/css/main.20e4a1bb.chunk.css",
+  "main.js": "/vocabulary-builder/static/js/main.ca26eb2f.chunk.js",
+  "main.js.map": "/vocabulary-builder/static/js/main.ca26eb2f.chunk.js.map",
+  "static/js/1.0c63da10.chunk.js": "/vocabulary-builder/static/js/1.0c63da10.chunk.js",
+  "static/js/1.0c63da10.chunk.js.map": "/vocabulary-builder/static/js/1.0c63da10.chunk.js.map",
   "runtime~main.js": "/vocabulary-builder/static/js/runtime~main.8eaf3627.js",
   "runtime~main.js.map": "/vocabulary-builder/static/js/runtime~main.8eaf3627.js.map",
-  "static/css/main.79764f0f.chunk.css.map": "/vocabulary-builder/static/css/main.79764f0f.chunk.css.map",
+  "static/css/main.20e4a1bb.chunk.css.map": "/vocabulary-builder/static/css/main.20e4a1bb.chunk.css.map",
   "index.html": "/vocabulary-builder/index.html",
-  "precache-manifest.0007e2145bc4b5523ef81814499a9807.js": "/vocabulary-builder/precache-manifest.0007e2145bc4b5523ef81814499a9807.js",
+  "precache-manifest.fe13e0ea4b9c02221e4b3dd005f40caf.js": "/vocabulary-builder/precache-manifest.fe13e0ea4b9c02221e4b3dd005f40caf.js",
   "service-worker.js": "/vocabulary-builder/service-worker.js"
 }
