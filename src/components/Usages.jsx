@@ -7,16 +7,20 @@ import TableCell from '@material-ui/core/TableCell'
 import Typography from '@material-ui/core/Typography'
 import groupBy from 'lodash/groupBy'
 import entries from 'lodash/entries'
+import sortBy from 'lodash/sortBy'
 
 import Stem from './Stem'
 
 class Usages extends Component {
   render () {
-    const { save } = this.props
-    const byUsage = groupBy(this.props.lookups, 'usage')
+    const { save, find, lookups } = this.props
+    lookups.forEach(lookup => {
+      lookup.pos =
+        parseInt(lookup.pos, 10) || parseInt(lookup.pos.split(':')[1], 10)
+    })
+    const byUsage = groupBy(sortBy(lookups, 'pos'), 'usage')
     const usages = entries(byUsage).map(([usage, lookups]) => ({
       usage,
-      pos: 'pos',
       lookups
     }))
 
@@ -28,7 +32,12 @@ class Usages extends Component {
               <TableCell>
                 <Typography>{usage.usage}</Typography>
                 {usage.lookups.map(lookup => (
-                  <Stem lookup={lookup} save={save} />
+                  <Stem
+                    key={lookup._id}
+                    lookup={lookup}
+                    save={save}
+                    find={find}
+                  />
                 ))}
               </TableCell>
             </TableRow>
@@ -41,7 +50,8 @@ class Usages extends Component {
 
 Usages.propTypes = {
   lookups: PropTypes.array.isRequired,
-  save: PropTypes.func.isRequired
+  save: PropTypes.func.isRequired,
+  find: PropTypes.func
 }
 
 Usages.defaultProps = {

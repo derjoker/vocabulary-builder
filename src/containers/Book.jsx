@@ -14,7 +14,7 @@ import flattenDepth from 'lodash/flattenDepth'
 import escape from 'lodash/escape'
 import stringify from 'csv-stringify'
 
-import Lookups from '../components/Lookups'
+import Usages from '../components/Usages'
 
 function card (word, example, definition, explanation) {
   const front = `<h2>${escape(word)}</h2><p>${escape(example)}</p>`
@@ -113,7 +113,7 @@ class Book extends Component {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Lookups
+        <Usages
           lookups={book.lookups}
           save={(lookupId, stem) => {
             this.client.callFunction('updateStem', [book._id, lookupId, stem])

@@ -30,7 +30,7 @@ class Stem extends Component {
   render () {
     const { lookup, save, find } = this.props
     return (
-      <div>
+      <span>
         <Chip
           key={lookup._id}
           label={lookup.stem}
@@ -104,7 +104,7 @@ class Stem extends Component {
               this.state.words.map(word => <Word key={word._id} word={word} />)}
           </DialogContent>
         </Dialog>
-      </div>
+      </span>
     )
   }
 }
