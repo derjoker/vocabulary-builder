@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/vocabulary-builder/static/js/runtime~main.8eaf3627.js"
   },
   {
-    "revision": "6994f2ebea8fa4806527",
-    "url": "/vocabulary-builder/static/js/main.6994f2eb.chunk.js"
+    "revision": "ab12d5bff607abe01156",
+    "url": "/vocabulary-builder/static/js/main.ab12d5bf.chunk.js"
   },
   {
     "revision": "63b2084ddd636e4f1e53",
     "url": "/vocabulary-builder/static/js/1.63b2084d.chunk.js"
   },
   {
-    "revision": "6994f2ebea8fa4806527",
+    "revision": "ab12d5bff607abe01156",
     "url": "/vocabulary-builder/static/css/main.6bd55e9e.chunk.css"
   },
   {
-    "revision": "b4493810e9ee2ef55bcc2b1c883255ca",
+    "revision": "830d4a6780b57cd1c030a54457e692e3",
     "url": "/vocabulary-builder/index.html"
   }
 ];
