@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography'
 import Slide from '@material-ui/core/Slide'
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload'
 import CloseIcon from '@material-ui/icons/Close'
+import Grid from '@material-ui/core/Grid'
 import { Stitch } from 'mongodb-stitch-browser-sdk'
 import flattenDepth from 'lodash/flattenDepth'
 import escape from 'lodash/escape'
@@ -113,19 +114,29 @@ class Book extends Component {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Usages
-          lookups={book.lookups}
-          save={(lookupId, stem) => {
-            this.client.callFunction('updateStem', [book._id, lookupId, stem])
-          }}
-          find={() => {
-            const dict = dicts[book.lang]
-            if (dict) {
-              return stem =>
-                this.client.callFunction('getWords', [dict, [stem]])
-            }
-          }}
-        />
+        <Grid container>
+          <Grid item sm={12} md={3} />
+          <Grid item sm={12} md={6}>
+            <Usages
+              lookups={book.lookups}
+              save={(lookupId, stem) => {
+                this.client.callFunction('updateStem', [
+                  book._id,
+                  lookupId,
+                  stem
+                ])
+              }}
+              find={() => {
+                const dict = dicts[book.lang]
+                if (dict) {
+                  return stem =>
+                    this.client.callFunction('getWords', [dict, [stem]])
+                }
+              }}
+            />
+          </Grid>
+          <Grid item sm={12} md={3} />
+        </Grid>
       </Dialog>
     )
   }
