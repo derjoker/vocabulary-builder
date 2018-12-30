@@ -17,7 +17,10 @@ class Word extends Component {
               </Typography>
               <Typography component='ol'>
                 {definition.examples.map(example => (
-                  <li key={example._id}>{example.example}</li>
+                  <li key={example._id}>
+                    {example.example +
+                      (example.definition ? ' ' + example.definition : '')}
+                  </li>
                 ))}
               </Typography>
             </li>
