@@ -28,7 +28,7 @@ class Stem extends Component {
   }
 
   render () {
-    const { lookup, save, find } = this.props
+    const { lookup, save } = this.props
     return (
       <span>
         <Chip
@@ -36,11 +36,9 @@ class Stem extends Component {
           label={lookup.stem}
           variant='outlined'
           onClick={() => {
-            if (find && find()) {
-              find()(lookup.stem).then(words => {
-                this.setState({ search: true, words })
-              })
-            }
+            window.open(
+              'https://www.duden.de/suchen/dudenonline/' + lookup.stem
+            )
           }}
           onDelete={() => {
             this.setState({ open: true })
